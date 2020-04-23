@@ -33,7 +33,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchAdapter.OnClick
     private val viewModel by viewModel<SearchViewModel>()
 
     private val searchResultAdapter = SearchAdapter(listOf(), this)
-    private val feedAdapter = FeedAdapter(mutableListOf(), this)
+    private val feedAdapter = FeedAdapter(this)
     private var shouldShowFeeds = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,12 +64,12 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchAdapter.OnClick
             when (feedList) {
                 is Status.Success -> {
                     hideStatusViews()
-                    feedAdapter.replaceData(feedList.data)
+                    feedAdapter.submitList(feedList.data)
                 }
                 is Status.Loading -> {
                     hideStatusViews()
                     if (!feedList.data.isNullOrEmpty()) {
-                        feedAdapter.replaceData(feedList.data)
+                        feedAdapter.submitList(feedList.data)
                     } else {
                         showLoading()
                     }
@@ -78,7 +78,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchAdapter.OnClick
                     hideStatusViews()
                     if (!feedList.data.isNullOrEmpty()) {
                         hideStatusViews()
-                        feedAdapter.replaceData(feedList.data)
+                        feedAdapter.submitList(feedList.data)
                     } else {
                         showNoNetwork()
                     }

@@ -4,6 +4,8 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.babblingbrook.mtgcardsearch.R
@@ -12,8 +14,8 @@ import com.babblingbrook.mtgcardsearch.util.getDescription
 import com.babblingbrook.mtgcardsearch.util.getImageLink
 import kotlinx.android.synthetic.main.rv_feed_item.view.*
 
-class FeedAdapter(private var channel: List<FeedItem>, private val listener: OnClickListener) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FeedAdapter(private val listener: OnClickListener) :
+    ListAdapter<FeedItem, FeedAdapter.FeedViewHolder>(FeedDiffCallback()) {
 
     interface OnClickListener {
         fun onFeedItemClicked(item: FeedItem)
@@ -22,23 +24,16 @@ class FeedAdapter(private var channel: List<FeedItem>, private val listener: OnC
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_feed_item, parent, false)
-        return CardViewHolder(view)
+    ): FeedViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return FeedViewHolder(inflater.inflate(R.layout.rv_feed_item, parent, false))
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        return (holder as CardViewHolder).bind(channel[position], listener)
+    override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
+        holder.bind(getItem(position), listener)
     }
 
-    fun replaceData(list: List<FeedItem>) {
-        channel = list
-        notifyDataSetChanged()
-    }
-
-    override fun getItemCount(): Int = channel.size
-
-    class CardViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
+    class FeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: FeedItem,  listener: OnClickListener) {
             itemView.article_image.load(item.link)
             val imageLink = getImageLink(item.description)
@@ -50,6 +45,16 @@ class FeedAdapter(private var channel: List<FeedItem>, private val listener: OnC
             itemView.setOnClickListener {
                 listener.onFeedItemClicked(item)
             }
+        }
+    }
+
+    class FeedDiffCallback : DiffUtil.ItemCallback<FeedItem>() {
+        override fun areItemsTheSame(oldItem: FeedItem, newItem: FeedItem): Boolean {
+            return oldItem.title == newItem.title
+        }
+
+        override fun areContentsTheSame(oldItem: FeedItem, newItem: FeedItem): Boolean {
+            return oldItem == newItem
         }
     }
 }
