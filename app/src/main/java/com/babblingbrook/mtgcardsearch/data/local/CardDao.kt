@@ -1,4 +1,4 @@
-package com.babblingbrook.mtgcardsearch.data
+package com.babblingbrook.mtgcardsearch.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert

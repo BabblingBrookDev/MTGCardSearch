@@ -1,4 +1,4 @@
-package com.babblingbrook.mtgcardsearch.data
+package com.babblingbrook.mtgcardsearch.data.remote
 
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
@@ -25,14 +25,22 @@ class ApiCallAdapter<R>(private val responseType: Type) :
         call.enqueue(object : Callback<R> {
             override fun onFailure(call: Call<R>, throwable: Throwable) {
                 try {
-                    deferred.complete(ApiResponse.create(throwable))
+                    deferred.complete(
+                        ApiResponse.create(
+                            throwable
+                        )
+                    )
                 } catch (t: Throwable) {
                     deferred.completeExceptionally(t)
                 }
             }
 
             override fun onResponse(call: Call<R>, response: Response<R>) {
-                deferred.complete(ApiResponse.create(response))
+                deferred.complete(
+                    ApiResponse.create(
+                        response
+                    )
+                )
             }
         })
 

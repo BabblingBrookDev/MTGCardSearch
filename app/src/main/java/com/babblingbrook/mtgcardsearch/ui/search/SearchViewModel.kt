@@ -1,9 +1,9 @@
 package com.babblingbrook.mtgcardsearch.ui.search
 
 import androidx.lifecycle.*
-import com.babblingbrook.mtgcardsearch.data.Repository
 import com.babblingbrook.mtgcardsearch.model.Card
 import com.babblingbrook.mtgcardsearch.model.FeedItem
+import com.babblingbrook.mtgcardsearch.repository.Repository
 import com.babblingbrook.mtgcardsearch.ui.Status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -1,11 +1,22 @@
 package com.babblingbrook.mtgcardsearch.model
 
+import android.content.Context
 import android.os.Parcelable
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.ImageSpan
+import android.widget.ImageView
+import androidx.annotation.Keep
+import androidx.core.content.ContextCompat
+import androidx.databinding.BindingAdapter
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import coil.api.load
+import com.babblingbrook.mtgcardsearch.util.StringUtils
+import com.google.android.material.textview.MaterialTextView
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
-import androidx.annotation.Keep
+import java.util.regex.Pattern
 
 data class CardIdentifier(val identifiers: List<Identifiers>)
 
@@ -155,3 +166,42 @@ data class RelatedUris(
     val mtgtop8: String,
     val tcgplayer_decks: String
 )
+
+@BindingAdapter("url")
+fun ImageView.setImage(url: String?) {
+    this.load(url)
+}
+
+@BindingAdapter("manaText", "context")
+fun MaterialTextView.parseMana(string: String, context: Context) {
+    val patternString = StringBuilder()
+    patternString.append('(')
+    var first = true
+    for (key in StringUtils.replacements.keys) {
+        if (first) {
+            first = false
+        } else {
+            patternString.append("|")
+        }
+        patternString.append(Pattern.quote(key))
+    }
+    patternString.append(")")
+
+    val spannable = SpannableStringBuilder(string)
+    val pattern = Pattern.compile(patternString.toString())
+    val matcher = pattern.matcher(string)
+    while (matcher.find()) {
+        val match = matcher.group(1) ?: ""
+        StringUtils.replacements[match]?.let {
+            val drawable = ContextCompat.getDrawable(context, it)
+            drawable?.let { d ->
+                d.setBounds(0, 0, 65, 65)
+                spannable.setSpan(
+                    ImageSpan(d, ImageSpan.ALIGN_BOTTOM),
+                    matcher.start(), matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+        }
+    }
+    this.text = spannable
+}

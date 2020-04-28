@@ -1,25 +1,24 @@
 package com.babblingbrook.mtgcardsearch.ui.favorites
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.babblingbrook.mtgcardsearch.R
 import com.babblingbrook.mtgcardsearch.model.Card
+import com.babblingbrook.mtgcardsearch.ui.adapters.CardAdapter
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FavoritesFragment : Fragment(R.layout.fragment_favorites), FavoritesAdapter.OnClickListener {
+class FavoritesFragment : Fragment(R.layout.fragment_favorites), CardAdapter.OnClickListener {
 
     private val viewModel by viewModel<FavoritesViewModel>()
 
-    private val favoritesAdapter = FavoritesAdapter(listOf(), this)
+    private val favoritesAdapter =
+        CardAdapter(listOf(), this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,17 +30,17 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), FavoritesAdapte
             )
         )
         rv_favorites.adapter = favoritesAdapter
-        viewModel.cards.observe(viewLifecycleOwner, Observer {
+        viewModel.cards.observe(viewLifecycleOwner) {
             favoritesAdapter.replaceData(it)
-        })
+        }
 
         toolbar.setNavigationOnClickListener {
-            it.findNavController().navigateUp()
+            findNavController().navigateUp()
         }
     }
 
     override fun onCardRowClicked(view: View, card: Card?) {
         val action = FavoritesFragmentDirections.actionFavoritesFragmentToDetailFragment(card)
-        this.findNavController().navigate(action)
+        findNavController().navigate(action)
     }
 }

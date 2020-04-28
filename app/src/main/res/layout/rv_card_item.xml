@@ -1,85 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_bg"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="8dp">
+<layout>
 
-    <LinearLayout
-        android:id="@+id/card_image_block"
-        android:layout_width="wrap_content"
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="card"
+            type="com.babblingbrook.mtgcardsearch.model.Card" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/item_bg"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="8dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/card_image"
-            android:layout_width="70dp"
-            android:layout_height="100dp" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/card_image2"
-            android:layout_width="70dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="8dp"
-            android:visibility="gone" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/card_one_block"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@+id/card_image_block"
-        app:layout_constraintTop_toTopOf="@id/card_image_block">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/card_name"
+        <LinearLayout
+            android:id="@+id/card_image_block"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:textSize="18sp"
-            tools:text="Ral, Caller of Storms" />
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/card_type"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/card_image"
+                android:layout_width="70dp"
+                app:url="@{card.card_faces != null ? card.card_faces[0].image_uris.normal : card.image_uris.normal}"
+                android:layout_height="100dp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/card_image2"
+                android:layout_width="70dp"
+                app:url="@{card.card_faces[1].image_uris.normal}"
+                android:layout_height="100dp"
+                android:layout_marginLeft="8dp"
+                android:visibility="@{card.card_faces != null ? View.VISIBLE : View.GONE}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/card_one_block"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-            tools:text="Legendary Planeswalker" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/card_two_block"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        android:visibility="gone"
-        app:layout_constraintStart_toEndOf="@+id/card_image_block"
-        app:layout_constraintTop_toBottomOf="@+id/card_one_block">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/card_name2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:textSize="18sp"
+            android:orientation="vertical"
             app:layout_constraintStart_toEndOf="@+id/card_image_block"
-            app:layout_constraintTop_toTopOf="@id/card_image_block"
-            tools:text="Ral, Caller of Storms" />
+            app:layout_constraintTop_toTopOf="@id/card_image_block">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/card_type2"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/card_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{card.card_faces != null ? card.card_faces[0].name : card.name}"
+                android:layout_marginLeft="16dp"
+                android:textSize="18sp"
+                tools:text="Ral, Caller of Storms" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/card_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{card.card_faces != null ? card.card_faces[0].type_line : card.type_line}"
+                android:layout_marginLeft="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                tools:text="Legendary Planeswalker" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/card_two_block"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-            tools:text="Legendary Planeswalker" />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_marginTop="8dp"
+            android:visibility="@{card.card_faces != null ? View.VISIBLE : View.GONE}"
+            android:orientation="vertical"
+            app:layout_constraintStart_toEndOf="@+id/card_image_block"
+            app:layout_constraintTop_toBottomOf="@+id/card_one_block">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/card_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@{card.card_faces[1].name}"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/card_image_block"
+                app:layout_constraintTop_toTopOf="@id/card_image_block"
+                tools:text="Ral, Caller of Storms" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/card_type2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{card.card_faces[1].type_line}"
+                android:layout_marginLeft="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                tools:text="Legendary Planeswalker" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

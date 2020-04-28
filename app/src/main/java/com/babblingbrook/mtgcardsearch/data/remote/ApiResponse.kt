@@ -1,4 +1,4 @@
-package com.babblingbrook.mtgcardsearch.data
+package com.babblingbrook.mtgcardsearch.data.remote
 
 import retrofit2.Response
 import java.io.IOException
@@ -11,22 +11,28 @@ sealed class ApiResponse<T> {
                 if (it.contains("Unable to resolve host") || error is IOException) {
                     return ApiNetworkError()
                 }
-                return ApiGenericError(it)
+                return ApiGenericError(
+                    it
+                )
             }
             return ApiGenericError("No error message")
         }
 
         fun <T> create(response: Response<T>): ApiResponse<T> {
-            if (response.isSuccessful) {
+            return if (response.isSuccessful) {
                 val body = response.body()
                 if (body == null || response.code() == 204) {
-                    return ApiEmptyResponse()
+                    ApiEmptyResponse()
                 } else {
-                    return ApiSuccessResponse(body)
+                    ApiSuccessResponse(
+                        body
+                    )
                 }
             } else {
                 val errorMessage = response.errorBody()?.toString() ?: response.message()
-                return ApiGenericError(errorMessage ?: "unknown error")
+                ApiGenericError(
+                    errorMessage ?: "unknown error"
+                )
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.babblingbrook.mtgcardsearch.data
+package com.babblingbrook.mtgcardsearch.data.remote
 
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
@@ -21,6 +21,8 @@ class ApiCallAdapterFactory : CallAdapter.Factory() {
         }
         val bodyType = getParameterUpperBound(0, observableType)
 
-        return ApiCallAdapter<Any>(bodyType)
+        return ApiCallAdapter<Any>(
+            bodyType
+        )
     }
 }

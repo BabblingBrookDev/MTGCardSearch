@@ -1,7 +1,9 @@
-package com.babblingbrook.mtgcardsearch.data
+package com.babblingbrook.mtgcardsearch.data.remote
 
+import com.babblingbrook.mtgcardsearch.model.CardData
 import com.babblingbrook.mtgcardsearch.model.CardIdentifier
 import com.babblingbrook.mtgcardsearch.model.Feed
+import com.babblingbrook.mtgcardsearch.model.SearchData
 import kotlinx.coroutines.Deferred
 import retrofit2.http.*
 

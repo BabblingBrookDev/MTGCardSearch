@@ -1,6 +1,9 @@
-package com.babblingbrook.mtgcardsearch.data
+package com.babblingbrook.mtgcardsearch.repository
 
 import androidx.lifecycle.LiveData
+import com.babblingbrook.mtgcardsearch.data.local.CardDao
+import com.babblingbrook.mtgcardsearch.data.local.FeedDao
+import com.babblingbrook.mtgcardsearch.data.remote.*
 import com.babblingbrook.mtgcardsearch.model.*
 import com.babblingbrook.mtgcardsearch.ui.Status
 import kotlinx.coroutines.Deferred
@@ -17,7 +20,8 @@ class Repository(
         emit(Status.loading(null))
         when (val searchResponse = apiService.search(query).await()) {
             is ApiSuccessResponse -> {
-                when (val cardResponse = apiService.getCards(getCardIdentifiers(searchResponse.body.data)).await()) {
+                when (val cardResponse =
+                    apiService.getCards(getCardIdentifiers(searchResponse.body.data)).await()) {
                     is ApiSuccessResponse -> {
                         val cardResponseBody = cardResponse.body
                         emit(Status.success(cardResponseBody.data))
@@ -59,12 +63,15 @@ class Repository(
             override fun shouldFetch(data: List<FeedItem>?): Boolean {
                 return true
             }
+
             override suspend fun loadFromDb(): List<FeedItem> {
                 return feedDao.loadFeedItems()
             }
+
             override suspend fun createCallAsync(): Deferred<ApiResponse<Feed>> {
                 return apiService.getFeedsAsync("https://magic.wizards.com/en/rss/rss.xml")
             }
+
             override suspend fun saveCallResults(feed: Feed) {
                 feedDao.deleteAndReplaceFeedItems(feed.channel.item)
             }

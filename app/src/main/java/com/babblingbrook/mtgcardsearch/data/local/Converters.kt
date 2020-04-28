@@ -1,10 +1,8 @@
-package com.babblingbrook.mtgcardsearch.data
+package com.babblingbrook.mtgcardsearch.data.local
 
 import androidx.room.TypeConverter
 import com.babblingbrook.mtgcardsearch.model.*
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import java.lang.reflect.Type
 
 class Converters {
     @TypeConverter
@@ -55,7 +53,7 @@ class Converters {
     @TypeConverter
     fun stringToRelatedUris(json: String?): RelatedUris? = fromJson(json)
 
-    inline fun <reified T> fromJson(value: String?): T {
+    private inline fun <reified T> fromJson(value: String?): T {
         val gson = Gson()
         return gson.fromJson(
             value,
@@ -63,7 +61,7 @@ class Converters {
         )
     }
 
-    inline fun <reified T> toJson(value: T): String {
+    private inline fun <reified T> toJson(value: T): String {
         val gson = Gson()
         return gson.toJson(value)
     }

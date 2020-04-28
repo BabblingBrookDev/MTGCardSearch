@@ -1,8 +1,7 @@
-package com.babblingbrook.mtgcardsearch.data
+package com.babblingbrook.mtgcardsearch.data.local
 
 import androidx.room.*
 import com.babblingbrook.mtgcardsearch.model.FeedItem
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FeedDao {

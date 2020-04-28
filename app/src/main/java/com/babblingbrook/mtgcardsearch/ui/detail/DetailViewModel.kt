@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.babblingbrook.mtgcardsearch.data.Repository
 import com.babblingbrook.mtgcardsearch.model.Card
+import com.babblingbrook.mtgcardsearch.repository.Repository
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val repository: Repository) : ViewModel() {
@@ -23,7 +23,7 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
                 card.isFavorite = true
                 repository.addFavorite(card)
             } finally {
-                _card.postValue(card)
+                _card.value = card
             }
         }
     }
@@ -34,7 +34,7 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
                 card.isFavorite = false
                 repository.removeFavorite(card.name)
             } finally {
-                _card.postValue(card)
+                _card.value = card
             }
         }
     }

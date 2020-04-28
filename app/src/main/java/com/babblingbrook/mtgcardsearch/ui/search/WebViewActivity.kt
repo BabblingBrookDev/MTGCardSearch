@@ -7,7 +7,7 @@ import com.babblingbrook.mtgcardsearch.R
 class WebViewActivity : AppCompatActivity() {
 
     companion object {
-        val EXTRA_URL = "extra.url"
+        const val EXTRA_URL = "extra.url"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

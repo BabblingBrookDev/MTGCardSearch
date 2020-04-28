@@ -1,4 +1,4 @@
-package com.babblingbrook.mtgcardsearch.data
+package com.babblingbrook.mtgcardsearch.data.remote
 
 import okhttp3.RequestBody
 import okhttp3.ResponseBody

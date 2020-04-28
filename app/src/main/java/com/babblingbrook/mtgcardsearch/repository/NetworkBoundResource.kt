@@ -1,7 +1,11 @@
-package com.babblingbrook.mtgcardsearch.data
+package com.babblingbrook.mtgcardsearch.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.babblingbrook.mtgcardsearch.data.remote.ApiGenericError
+import com.babblingbrook.mtgcardsearch.data.remote.ApiNetworkError
+import com.babblingbrook.mtgcardsearch.data.remote.ApiResponse
+import com.babblingbrook.mtgcardsearch.data.remote.ApiSuccessResponse
 import com.babblingbrook.mtgcardsearch.ui.Status
 import kotlinx.coroutines.*
 import kotlin.coroutines.coroutineContext
