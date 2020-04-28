@@ -54,15 +54,15 @@
                     android:layout_height="320dp"
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
-                    app:url="@{vm.card.image_uris.art_crop}"
-                    app:layout_collapseMode="parallax" />
+                    app:layout_collapseMode="parallax"
+                    app:url="@{vm.card.image_uris.art_crop}" />
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
-                    android:onClick="@{view -> Navigation.findNavController(view).navigateUp()}"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="#19000000"
+                    android:onClick="@{view -> Navigation.findNavController(view).navigateUp()}"
                     app:contentInsetStartWithNavigation="0dp"
                     app:layout_collapseMode="pin"
                     app:navigationIcon="@drawable/ic_detail_back"
@@ -73,10 +73,10 @@
                         android:id="@+id/mana_cost"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        app:manaText="@{vm.card.mana_cost}"
-                        app:context="@{context}"
                         android:layout_gravity="right"
-                        android:layout_margin="16dp" />
+                        android:layout_margin="16dp"
+                        app:context="@{context}"
+                        app:manaText="@{vm.card.mana_cost}" />
                 </androidx.appcompat.widget.Toolbar>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -113,10 +113,10 @@
                             android:id="@+id/oracle_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:manaText="@{vm.card.oracle_text}"
-                            app:context="@{context}"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:visibility="@{vm.card.oracle_text != null ? View.VISIBLE : View.GONE}"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                            app:context="@{context}"
+                            app:manaText="@{vm.card.oracle_text}" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/flavor_text"
@@ -124,9 +124,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:text="@{vm.card.flavor_text}"
-                            android:visibility="@{vm.card.flavor_text != null ? View.VISIBLE : View.GONE}"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textStyle="italic" />
+                            android:textStyle="italic"
+                            android:visibility="@{vm.card.flavor_text != null ? View.VISIBLE : View.GONE}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -144,10 +144,10 @@
                         android:id="@+id/card_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@{vm.card.type_line}"
                         android:textColor="#fff"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:text="@{vm.card.type_line}"
                         tools:text="Legendary Planeswalker" />
 
                     <ImageView
@@ -165,10 +165,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
                         android:layout_toLeftOf="@id/favorite"
-                        android:visibility="@{vm.card.power != null ? View.VISIBLE : View.GONE}"
                         android:textColor="#fff"
                         android:textSize="18sp"
                         android:textStyle="bold"
+                        android:visibility="@{vm.card.power != null ? View.VISIBLE : View.GONE}"
                         tools:text="3/2" />
 
                     <TextView
@@ -177,11 +177,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
                         android:layout_toLeftOf="@id/favorite"
-                        android:visibility="@{vm.card.loyalty != null ? View.VISIBLE : View.GONE}"
                         android:text="@{vm.card.loyalty}"
                         android:textColor="#fff"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="@{vm.card.loyalty != null ? View.VISIBLE : View.GONE}" />
                 </RelativeLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

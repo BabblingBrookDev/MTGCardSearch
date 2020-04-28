@@ -27,8 +27,8 @@
                 android:id="@+id/article_image"
                 android:layout_width="match_parent"
                 android:layout_height="194dp"
-                app:feedImageLink="@{feed_item.description}"
                 android:scaleType="fitXY"
+                app:feedImageLink="@{feed_item.description}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,8 +44,8 @@
                     android:id="@+id/article_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{feed_item.title}"
                     android:gravity="bottom"
+                    android:text="@{feed_item.title}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -63,8 +63,8 @@
                     android:id="@+id/article_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:feedDesc="@{feed_item.description}"
                     android:layout_marginTop="16dp"
+                    app:feedDesc="@{feed_item.description}"
                     app:layout_constraintTop_toBottomOf="@+id/article_date"
                     tools:text="In the latest update of Magic: The Gathering Companion, we've made improvements to how you update your account information in order to play events" />
 

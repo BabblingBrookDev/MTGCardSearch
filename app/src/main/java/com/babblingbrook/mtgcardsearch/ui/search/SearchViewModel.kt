@@ -1,6 +1,12 @@
 package com.babblingbrook.mtgcardsearch.ui.search
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.babblingbrook.mtgcardsearch.model.Card
 import com.babblingbrook.mtgcardsearch.model.FeedItem
 import com.babblingbrook.mtgcardsearch.repository.Repository

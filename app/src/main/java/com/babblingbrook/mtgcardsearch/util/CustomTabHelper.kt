@@ -50,8 +50,8 @@ class CustomTabHelper {
             packagesSupportingCustomTabs.size == 1 -> sPackageNameToUse =
                 packagesSupportingCustomTabs[0]
             !TextUtils.isEmpty(defaultViewHandlerPackageName)
-                    && !hasSpecializedHandlerIntents(context, activityIntent)
-                    && packagesSupportingCustomTabs.contains(defaultViewHandlerPackageName) ->
+                && !hasSpecializedHandlerIntents(context, activityIntent)
+                && packagesSupportingCustomTabs.contains(defaultViewHandlerPackageName) ->
                 sPackageNameToUse = defaultViewHandlerPackageName
             packagesSupportingCustomTabs.contains(STABLE_PACKAGE) -> sPackageNameToUse =
                 STABLE_PACKAGE

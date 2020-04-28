@@ -30,16 +30,16 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/card_image"
                 android:layout_width="70dp"
-                app:url="@{card.card_faces != null ? card.card_faces[0].image_uris.normal : card.image_uris.normal}"
-                android:layout_height="100dp" />
+                android:layout_height="100dp"
+                app:url="@{card.card_faces != null ? card.card_faces[0].image_uris.normal : card.image_uris.normal}" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/card_image2"
                 android:layout_width="70dp"
-                app:url="@{card.card_faces[1].image_uris.normal}"
                 android:layout_height="100dp"
                 android:layout_marginLeft="8dp"
-                android:visibility="@{card.card_faces != null ? View.VISIBLE : View.GONE}" />
+                android:visibility="@{card.card_faces != null ? View.VISIBLE : View.GONE}"
+                app:url="@{card.card_faces[1].image_uris.normal}" />
         </LinearLayout>
 
         <LinearLayout
@@ -54,8 +54,8 @@
                 android:id="@+id/card_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{card.card_faces != null ? card.card_faces[0].name : card.name}"
                 android:layout_marginLeft="16dp"
+                android:text="@{card.card_faces != null ? card.card_faces[0].name : card.name}"
                 android:textSize="18sp"
                 tools:text="Ral, Caller of Storms" />
 
@@ -63,8 +63,8 @@
                 android:id="@+id/card_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{card.card_faces != null ? card.card_faces[0].type_line : card.type_line}"
                 android:layout_marginLeft="16dp"
+                android:text="@{card.card_faces != null ? card.card_faces[0].type_line : card.type_line}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
                 tools:text="Legendary Planeswalker" />
         </LinearLayout>
@@ -74,8 +74,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:visibility="@{card.card_faces != null ? View.VISIBLE : View.GONE}"
             android:orientation="vertical"
+            android:visibility="@{card.card_faces != null ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toEndOf="@+id/card_image_block"
             app:layout_constraintTop_toBottomOf="@+id/card_one_block">
 
@@ -94,8 +94,8 @@
                 android:id="@+id/card_type2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{card.card_faces[1].type_line}"
                 android:layout_marginLeft="16dp"
+                android:text="@{card.card_faces[1].type_line}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
                 tools:text="Legendary Planeswalker" />
         </LinearLayout>

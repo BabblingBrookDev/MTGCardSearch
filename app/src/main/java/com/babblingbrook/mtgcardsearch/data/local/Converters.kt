@@ -1,7 +1,12 @@
 package com.babblingbrook.mtgcardsearch.data.local
 
 import androidx.room.TypeConverter
-import com.babblingbrook.mtgcardsearch.model.*
+import com.babblingbrook.mtgcardsearch.model.CardFaces
+import com.babblingbrook.mtgcardsearch.model.ImageUris
+import com.babblingbrook.mtgcardsearch.model.Legalities
+import com.babblingbrook.mtgcardsearch.model.Prices
+import com.babblingbrook.mtgcardsearch.model.PurchaseUris
+import com.babblingbrook.mtgcardsearch.model.RelatedUris
 import com.google.gson.Gson
 
 class Converters {

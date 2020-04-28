@@ -7,7 +7,12 @@ import com.babblingbrook.mtgcardsearch.data.remote.ApiNetworkError
 import com.babblingbrook.mtgcardsearch.data.remote.ApiResponse
 import com.babblingbrook.mtgcardsearch.data.remote.ApiSuccessResponse
 import com.babblingbrook.mtgcardsearch.ui.Status
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.coroutines.coroutineContext
 
 abstract class NetworkBoundResource<ResultType, RequestType> {
